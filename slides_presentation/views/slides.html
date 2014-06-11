@@ -1,0 +1,85 @@
+﻿@Master['master/master_internal']
+
+@Section['Css']
+<link href="../admin/css/dataTables.bootstrap.css" rel="stylesheet" />
+<style>
+    table {
+        table-layout: fixed;
+    }
+
+        table th, table td {
+            overflow: hidden;
+        }
+</style>
+@EndSection
+
+@Section['Content']
+<!--This is content on the index page-->
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Slides</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <a href="/Slides/0" type="reset" class="btn btn-info">Create a new Slide</a>
+        </div>
+    </div>
+    <br />
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    List of Slides
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10%">Ordine</th>
+                                    <th style="width:70%">Contenuto</th>
+                                    <th style="width: 10%">Stato</th>
+                                    <th style="width: 10%">Modify</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @Each.Model.Slides
+                                <tr class="gradeX">
+                                    <td class="center">@Current.Value.Ordine</td>
+                                    <td>@Current.Value.Contenuto</td>
+                                    <td>@Current.Value.Stato</td>
+                                    <td><a class="btn btn-success btn-sm btn-block" href="/slides/@Current.Value.Ordine">Modify</a></td>
+                                </tr>
+                                @EndEach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+</div>
+@EndSection
+
+
+@Section['Script']
+<!-- Page-Level Plugin Scripts - Tables -->
+<script src="../admin/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="../admin/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').dataTable();
+    });
+</script>
+@EndSection

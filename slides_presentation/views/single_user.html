@@ -1,0 +1,118 @@
+﻿@Master['master/master_internal']
+
+@Section['Content']
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Modify a single User</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    @If.Hasmessages
+    @Partial['partial/alert.html']
+    @EndIf
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    You have selected "@Model.user.UserName"
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form role="form" method="post">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-control" placeholder="Enter some text" value="@Model.user.UserName" name="username">
+                                    <p class="help-block">The username should be unique</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password"  class="form-control" placeholder="Enter some text" value="" name="password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Repeat Password</label>
+                                    <input type="password"  class="form-control" placeholder="Enter some text" value="" name="repeate_password">
+                                </div>
+                                @If.me.IsAdmin
+                                <input type="hidden" id="hr" value="@Model.user.SimpleRoles" name="hr" />
+                                <div class="form-group">
+                                    <label>Ruoli</label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="0" id="chk0" name="chk0" class="ckc">Admin
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="1" id="chk1" name="chk1" class="ckc">Editor
+                                        </label>
+                                    </div>
+                                </div>
+                                @EndIf
+                                <button type="submit" class="btn btn-success">Confirm</button>
+                                @If.me.IsAdmin
+                                <a href="/users" type="reset" class="btn btn-default">Cancel</a>
+                                @EndIf
+                            </form>
+                        </div>
+                        <!-- /.col-lg-6 (nested) -->
+
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+</div>
+<!-- /#page-wrapper -->
+@EndSection
+
+
+@Section['Script']
+
+<script>
+    $(document).ready(function () {
+
+        var r = $("#hr").val().toString().split(",");
+
+        for (var i = 0; i < r.length; i++) {
+            $("#chk" + r[i]).attr('checked', 'checked')
+        }
+     
+
+        $(".ckc").each(function () {
+            var ck = $(this);
+
+            ck.click(function () {
+                var j = ck.val();
+
+                if ($("#chk" + j).attr('checked'))
+                {
+                    $("#chk" + j).removeAttr('checked');
+                    //ar.pop(r[j]);
+                }else
+                {
+                    $("#chk" + j).attr('checked', 'checked');
+                    //ar.push(r[j]);
+                }
+
+                var ar = [];
+                $(".ckc").each(function () {
+                    if ($(this).attr('checked'))
+                        ar.push($(this).val());
+                });
+
+                console.log(ar);
+                $("#hr").val(ar.join(",")); 
+            });
+        });
+    });
+</script>
+@EndSection
+

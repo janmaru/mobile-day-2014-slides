@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <configs>
+    <app value="sql_compact" key="provider"></app>
+    <!--<app value="sql_server" key="provider"></app>-->
+    <app value="Data Source=|DataDirectory|\slides.sdf;Persist Security Info=False;" key="sql_compact"></app>
+    <app value="Data Source=.\SQLEXPRESS;Initial Catalog=slides;Persist Security Info=True;User ID=user;Password=pass" key="sql_server"></app>
+    <app value="somevalue" key="cryptokey"></app>
+  </configs>
+  <users>
+    <user id="0" password="6D1D7C42C83D5B8EA68816FF4B7EAA48" username="maru" roles="0,1"></user>
+    <user id="1" password="6D1D7C42C83D5B8EA68816FF4B7EAA48" username="the_other" roles="1"></user>
+  </users>
+</root>

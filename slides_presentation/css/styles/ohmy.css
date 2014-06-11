@@ -1,0 +1,27 @@
+﻿/*********************************************
+ * ADDED BY JANMARU
+ *********************************************/
+.gray {
+    color: dimgray !important;
+}
+
+.orange {
+    color: orange !important;
+}
+
+.yellow {
+    color: yellow !important;
+}
+
+.azure {
+    color: azure !important;
+}
+
+.purple {
+    color: purple !important;
+}
+
+img.tiny {
+    padding: 0;
+    margin: 0 !important;
+}

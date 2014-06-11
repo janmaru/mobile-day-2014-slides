@@ -1,0 +1,144 @@
+﻿@Master['master/master_internal']
+@Section['Css']
+<link href="../admin/css/main.css" rel="stylesheet" />
+<link href="../admin/css/jquery.Jcrop.min.css" rel="stylesheet" />
+<!--<link href="../admin/css/wysiwyg.css" rel="stylesheet" />-->
+<link href="../Admin/js/summernote/summernote.css" rel="stylesheet" />
+@EndSection
+@Section['Content']
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Modify a single Slide</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    @If.Hasmessages
+    @Partial['partial/alert.html']
+    @EndIf
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    You have selected the "@Model.Slide.Ordine"th Slide
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form role="form" method="post">
+                                <div class="form-group">
+                                    <label>Ordine</label>
+                                    <input class="form-control" placeholder="Type the order" value="@Model.Slide.Ordine" name="ordine">
+                                    <p class="help-block">Ordine della Slide.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Attributi</label>
+                                    <input class="form-control" placeholder="Type some attributes from the slide" value="@Model.Slide.Attributi" name="attributi">
+                                    <p class="help-block">Attributi della Slide.</p>
+                                </div>
+                                @Partial['partial/summerEditor.html']
+                                <input type="hidden" id="stato" value="@Model.Slide.Stato" name="stato" />
+                                <div class="form-group">
+                                    <label>Stato</label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="0" id="chk0" name="chk0" class="ckc">Attivo
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success">Confirm</button>
+                                <a href="/Slides" type="reset" class="btn btn-default">Cancel</a>
+                            </form>
+                        </div>
+                        <!-- /.col-lg-6 (nested) -->
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+</div>
+<!-- /#page-wrapper -->
+ 
+@EndSection
+
+@Section['Script']
+<script src="../admin/js/jquery.Jcrop.js"></script>
+<script src="../admin/js/script.js"></script>
+<script src="../Admin/js/summernote/summernote.js"></script>
+<!--<script src="../admin/js/wysihtml/advanced.js"></script>
+<script src="../admin/js/wysihtml/wysihtml5-0.4.0pre.js"></script>-->
+<script>
+    $(document).ready(function () {
+        //summernote
+        $('.summernote').summernote({
+            height: 200
+        });
+
+        $('form').on('submit', function (e) {
+            $('.summernote').code();
+        });
+
+        //wysihtml5
+        //var editor = new wysihtml5.Editor("textarea", {
+        //    toolbar: "toolbar",
+        //    stylesheets: "css/stylesheet.css",
+        //    parserRules: wysihtml5ParserRules
+        //});
+
+        //var log = document.getElementById("log");
+
+        //editor
+        //  .on("load", function () {
+        //      log.innerHTML += "<div>load</div>";
+        //  })
+        //  .on("focus", function () {
+        //      log.innerHTML += "<div>focus</div>";
+        //  })
+        //  .on("blur", function () {
+        //      log.innerHTML += "<div>blur</div>";
+        //  })
+        //  .on("change", function () {
+        //      log.innerHTML += "<div>change</div>";
+        //  })
+        //  .on("paste", function () {
+        //      log.innerHTML += "<div>paste</div>";
+        //  })
+        //  .on("newword:composer", function () {
+        //      log.innerHTML += "<div>newword:composer</div>";
+        //  })
+        //  .on("undo:composer", function () {
+        //      log.innerHTML += "<div>undo:composer</div>";
+        //  })
+        //  .on("redo:composer", function () {
+        //      log.innerHTML += "<div>redo:composer</div>";
+        //  });
+
+        var r = $("#stato").val();
+
+        if (r === 1 || r=== "True") {
+            $("#chk0").attr('checked', 'checked')
+        }
+
+        $(".ckc").each(function () {
+            var ck = $(this);
+
+            ck.click(function () {
+                if ($("#chk0").attr('checked')) {
+                    $("#chk0").removeAttr('checked');
+                    $("#stato").val("False");
+                } else {
+                    $("#chk0").attr('checked', 'checked');
+                    $("#stato").val("True");
+                }
+              
+            });
+        });
+    });
+</script>
+@EndSection

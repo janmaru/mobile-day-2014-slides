@@ -1,0 +1,12 @@
+ .step2, .error {
+    display: none;
+}
+  
+.jcrop-holder {
+    display: inline-block;
+}
+ 
+.jcrop-keymgr
+{
+    display:none !important;
+}

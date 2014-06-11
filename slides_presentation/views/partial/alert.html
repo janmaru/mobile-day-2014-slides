@@ -1,0 +1,18 @@
+﻿<!-- /.row -->
+@If.success
+<div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    @Each.Model.messages
+       @Current
+    @EndEach
+</div>
+@EndIf
+
+@IfNot.success
+<div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    @Each.Model.messages
+       @Current
+    @EndEach
+</div>
+@EndIf
